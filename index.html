@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Clube da Luta - Neon Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼</text></svg>">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg-color: #050505;
+        --neon-pink: #ff00ff;
+        --neon-cyan: #00ffff;
+        --text-color: #e0e0e0;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Roboto', sans-serif;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, .nav-link, .btn {
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* --- Navbar Neon --- */
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.95);
+        border-bottom: 1px solid var(--neon-pink);
+        box-shadow: 0 0 15px var(--neon-pink);
+    }
+    
+    .navbar-brand {
+        font-weight: bold;
+        color: #fff !important;
+        text-shadow: 0 0 5px var(--neon-pink);
+    }
+
+    .nav-link {
+        color: #fff !important;
+        transition: 0.3s;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        color: var(--neon-cyan) !important;
+        text-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* --- Botões Neon --- */
+    .btn-neon-primary {
+        background: transparent;
+        border: 2px solid var(--neon-pink);
+        color: var(--neon-pink);
+        box-shadow: 0 0 10px var(--neon-pink) inset, 0 0 20px var(--neon-pink);
+        transition: 0.3s;
+    }
+
+    .btn-neon-primary:hover {
+        background: var(--neon-pink);
+        color: #fff;
+        box-shadow: 0 0 40px var(--neon-pink);
+    }
+
+    .btn-neon-secondary {
+        background: transparent;
+        border: 2px solid var(--neon-cyan);
+        color: var(--neon-cyan);
+        box-shadow: 0 0 10px var(--neon-cyan) inset;
+        transition: 0.3s;
+    }
+
+    .btn-neon-secondary:hover {
+        background: var(--neon-cyan);
+        color: #000;
+        box-shadow: 0 0 40px var(--neon-cyan);
+    }
+
+    /* --- Banner --- */
+    .site-banner {
+        padding: 100px 0;
+        background: radial-gradient(circle at center, #111 0%, #000 100%);
+    }
+
+    .title-text {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink);
+    }
+    
+    /* Container e Estilo das Imagens */
+    .banner-img-container img {
+        border: 2px solid var(--neon-cyan);
+        box-shadow: 0 0 20px var(--neon-cyan);
+        border-radius: 10px;
+        filter: brightness(0.9) contrast(1.1);
+        object-fit: cover;
+        width: 100%;
+        max-height: 500px;
+        min-height: 300px; 
+    }
+
+    .about-img-custom {
+        border-radius: 20px;
+        box-shadow: 0 0 20px var(--neon-pink);
+        border: 1px solid var(--neon-pink);
+        object-fit: cover;
+        width: 100%;
+        max-height: 600px;
+        filter: grayscale(100%) contrast(1.2);
+        transition: 0.5s;
+    }
+    
+    .about-img-custom:hover {
+        filter: grayscale(0%) contrast(1.1);
+    }
+
+    /* --- Cards e Serviços --- */
+    .services {
+        background: var(--glass-bg);
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+    .services:hover {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 15px var(--neon-cyan);
+        transform: translateY(-5px);
+    }
+
+    /* --- MODAL LOGIN/CADASTRO --- */
+    .modal-content {
+        background-color: rgba(10, 10, 10, 0.95);
+        border: 1px solid var(--neon-cyan);
+        box-shadow: 0 0 20px var(--neon-cyan);
+        color: #fff;
+    }
+
+    .form-control, .form-select {
+        background-color: #111;
+        border: 1px solid #333;
+        color: var(--neon-cyan);
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #000;
+        border-color: var(--neon-pink);
+        box-shadow: 0 0 10px var(--neon-pink);
+        color: #fff;
+    }
+
+    .hidden { display: none; }
+
+    .auth-toggle {
+        cursor: pointer;
+        color: var(--neon-cyan);
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+    <header class="header_area">
+        <div class="main-menu">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <i class="fas fa-soap fa-lg" style="color:var(--neon-pink)"></i> CLUBE DA LUTA
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="ms-auto"></div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Missões</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                            <li class="nav-item">
+                                <button class="btn btn-neon-secondary btn-sm ms-3" onclick="openModal()">Área do Membro</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main" style="margin-top: 80px;">
+        <section class="site-banner">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 site-title">
+                        <h3 class="title-text">Seja bem-vindo(a)</h3>
+                        <h1 class="title-text" style="font-size: 3.5rem;">ao Clube</h1>
+                        <h1 class="title-text" style="color: var(--neon-cyan); font-size: 3.5rem;">da Luta</h1>
+                        <h4 class="text-white mt-3">By Brunno Durter</h4>
+
+                        <div class="site-buttons mt-5">
+                            <button type="button" class="btn btn-neon-primary me-3" onclick="openModal('register')">SEJA MEMBRO</button>
+                            <button type="button" class="btn btn-neon-secondary">SAIR DO SISTEMA</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 banner-image text-center">
+                        <div class="banner-img-container">
+                            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C0787DFBC63A70077C4F025B2543F0BFF566D4E4CD26D45A24C30010BFC2AB61/scale?width=1200&aspectRatio=1.78&format=jpeg" 
+                                 class="img-fluid" 
+                                 alt="Tyler Durden Banner"
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1543168256-418811576931?auto=format&fit=crop&q=80&w=2070';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-area py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="aboutimage text-center">
+                             <img src="https://images6.alphacoders.com/126/thumb-1920-1264263.jpg" 
+                                 class="img-fluid about-img-custom" 
+                                 alt="Fight Club Scene"
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1614959542037-567812c30058?auto=format&fit=crop&q=80&w=800';">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 about-title">
+                        <h2 class="pt-5" style="color: var(--neon-pink);">AS REGRAS</h2>
+                        <div class="paragraph py-4">
+                            <ul class="list-unstyled text-white">
+                                <li class="mb-2">1. Você não fala sobre o Clube da Luta.</li>
+                                <li class="mb-2">2. Você NÃO FALA sobre o Clube da Luta.</li>
+                                <li class="mb-2">3. Somente duas pessoas por luta.</li>
+                                <li class="mb-2">4. Sem camisa, sem sapatos.</li>
+                                <li class="mb-2">5. As lutas duram o tempo que for necessário.</li>
+                                <li class="mb-2">6. Se for sua primeira noite, você tem que lutar.</li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-neon-primary">Download PDF Regras</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-area py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center services-title mb-5">
+                        <h1 class="title-text">Serviços Oferecidos</h1>
+                        <p style="color: #aaa;">O que acontece no clube, fica no clube.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="services text-center">
+                            <i class="fas fa-fist-raised fa-3x mb-3" style="color: var(--neon-pink)"></i>
+                            <h5>Luta</h5>
+                            <p class="text-secondary">Combate corpo a corpo para alívio de estresse existencial.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="services text-center">
+                            <i class="fas fa-briefcase-medical fa-3x mb-3" style="color: var(--neon-cyan)"></i>
+                            <h5>Primeiros Socorros</h5>
+                            <p class="text-secondary">Gelo e curativos básicos. O resto é por sua conta.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="services text-center">
+                            <i class="fas fa-brain fa-3x mb-3" style="color: var(--neon-pink)"></i>
+                            <h5>Filosofia</h5>
+                            <p class="text-secondary">Descubra que você não é o conteúdo da sua carteira.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="services text-center">
+                            <i class="fas fa-bomb fa-3x mb-3" style="color: var(--neon-cyan)"></i>
+                            <h5>Missões</h5>
+                            <p class="text-secondary">Projeto Mayhem. Pergunte ao Tyler.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-area py-4" style="border-top: 1px solid var(--neon-pink);">
+        <div class="container text-center">
+            <div class="social mb-3">
+                <a href="#" class="mx-2 text-white"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="#" class="mx-2 text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="#" class="mx-2 text-white"><i class="fab fa-twitter fa-2x"></i></a>
+            </div>
+            <p class="parag">
+                Copyright ©2025 | Desenvolvido por <a href="https://github.com/brunnodev50" target="_blank" style="color: var(--neon-cyan); text-decoration: none;">brunnodev50</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="modalTitle">Login</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Usuário ou E-mail</label>
+                            <input type="text" class="form-control" id="loginUser" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginPass" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-neon-primary">ENTRAR</button>
+                        </div>
+                        <p class="text-center mt-3">
+                            Ainda não tem conta? <span class="auth-toggle" onclick="toggleAuth('register')">Cadastre-se</span>
+                        </p>
+                    </form>
+
+                    <form id="registerForm" class="hidden">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="regName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="regCpf" maxlength="14" oninput="maskCPF(this)" placeholder="000.000.000-00" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Sexo</label>
+                                <select class="form-select" id="regSex">
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Feminino</option>
+                                    <option value="O">Outro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Usuário (Nick)</label>
+                                <input type="text" class="form-control" id="regUser" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="regEmail" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="regPass" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="regPassConfirm" required>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-neon-secondary">CADASTRAR</button>
+                        </div>
+                        <p class="text-center mt-3">
+                            Já tem conta? <span class="auth-toggle" onclick="toggleAuth('login')">Fazer Login</span>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Instância do Modal
+        let authModal;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            authModal = new bootstrap.Modal(document.getElementById('authModal'));
+        });
+
+        function openModal(type = 'login') {
+            toggleAuth(type);
+            authModal.show();
+        }
+
+        // Alternar entre Login e Cadastro
+        function toggleAuth(type) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const modalTitle = document.getElementById('modalTitle');
+
+            if (type === 'register') {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                modalTitle.innerText = "Novo Membro - Cadastro";
+                modalTitle.style.color = "var(--neon-cyan)";
+            } else {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                modalTitle.innerText = "Acesso ao Clube";
+                modalTitle.style.color = "var(--neon-pink)";
+            }
+        }
+
+        // Máscara de CPF simples
+        function maskCPF(input) {
+            let value = input.value.replace(/\D/g, "");
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            
+            input.value = value;
+        }
+
+        // Lógica de Cadastro (Salvando no LocalStorage simulação)
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const pass = document.getElementById('regPass').value;
+            const confirm = document.getElementById('regPassConfirm').value;
+            const user = document.getElementById('regUser').value;
+            const email = document.getElementById('regEmail').value;
+
+            if(pass !== confirm) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const userData = {
+                nome: document.getElementById('regName').value,
+                cpf: document.getElementById('regCpf').value,
+                sexo: document.getElementById('regSex').value,
+                user: user,
+                email: email,
+                pass: pass
+            };
+
+            localStorage.setItem('user_' + user, JSON.stringify(userData));
+            
+            alert("Bem-vindo ao Clube, " + user + ". Lembre-se da primeira regra.");
+            toggleAuth('login');
+        });
+
+        // Lógica de Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loginInput = document.getElementById('loginUser').value;
+            const passInput = document.getElementById('loginPass').value;
+
+            const storedUser = localStorage.getItem('user_' + loginInput);
+
+            if (storedUser) {
+                const data = JSON.parse(storedUser);
+                if (data.pass === passInput) {
+                    alert("Acesso Autorizado. Bem-vindo, " + data.nome);
+                    authModal.hide();
+                    document.querySelector('.btn-neon-secondary').innerText = data.user.toUpperCase();
+                } else {
+                    alert("Senha incorreta.");
+                }
+            } else {
+                alert("Usuário não encontrado. Você precisa lutar para entrar.");
+            }
+        });
+    </script>
+</body>
+</html>
